@@ -1,0 +1,31 @@
+<!-- <div *ngIf="currency" class="crypto-detail">
+  <h2>{{ currency.name }} ({{ currency.symbol }})</h2>
+  <p>Balance actual: {{ currency.quote.USD.price }}</p>
+   Mostrar más detalles de la criptomoneda aquí
+</div>
+<h1>Cripto DEtails</h1> -->
+<div class="crypto-details-container p-shadow-3">
+  <div class="crypto-header">
+    <h2>{{ currency?.name }} ({{ currency?.symbol }})</h2>
+    <p>Balance actual</p>
+    <button pButton label="Comprar" class="p-button p-button-success" (click)="showBuyDialog()"></button>
+  </div>
+
+  <div class="crypto-info">
+    <div class="chart p-shadow-1">
+      <!-- Aquí puedes integrar tu gráfico de tendencias -->
+      <!-- Puedes usar bibliotecas como Chart.js o Highcharts -->
+      <!-- <img src="trends-chart.png" alt="Tendencias de mercado"> -->
+    </div>
+
+    <div class="details">
+      <p>Precio: ${{ currency?.quote?.USD?.price }}</p>
+      <p>Volumen 24h: {{ currency?.quote?.USD?.volume_24h | number }}</p>
+      <p>Tendencia 30 días: {{ currency?.quote?.USD?.percent_change_30d | number }}%</p>
+      <p>Cambio 24h: {{ currency?.quote?.USD?.percent_change_24h | number }}%</p>
+      <p>Market Cap: ${{ currency?.quote?.USD?.market_cap | number }}</p>
+      <p>Última actualización: {{ currency?.quote?.USD?.last_updated }}</p>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,148 @@
+<div class="container-login100 bgc">
+  <div class="login100-form-title m-t-2 m-b-2">
+    <span class="login100-form-title m-b-10">
+      Editar Perfil
+    </span>
+
+    <div class="switch-form m-t-10">
+      <p-selectButton [options]="switchOptions" #switchButton (onChange)="onSwitchFormChange($event.value)">
+        <ng-template let-option>
+          {{ option.label }}
+        </ng-template>
+      </p-selectButton>
+    </div>
+    <div class="m-t-80 m-b-80" *ngIf="showPasswordForm">
+      <form class="login100-form" [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
+
+
+        <!-- Información personal -->
+        <p-fieldset legend="Cambiar Contraseña">
+          <div class="wrap-input100 m-t-10 m-b-10">
+            <span class="label-input100">Ingresa tu Contraseña actual : </span>
+            <input class="input100" type="password" formControlName="currentPassword" placeholder="Contraseña actual">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-lock"></i>
+            </span>
+          </div>
+          <div class="wrap-input100 m-t-10 m-b-10">
+            <span class="label-input100">Nueva Contraseña </span>
+            <input class="input100" type="password" formControlName="newPassword" placeholder="Nueva Contraseña">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-lock"></i>
+            </span>
+          </div>
+          <div class="wrap-input100 m-t-10 m-b-10">
+            <span class="label-input100">Confirma nueva Contraseña </span>
+            <input class="input100" type="password" formControlName="confirmPassword"
+              placeholder="Confirma nueva Contraseña">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-lock"></i>
+            </span>
+          </div>
+        </p-fieldset>
+        <div class="container-login100-form-btn m-t-10 m-b-10">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn" type="submit">
+              Guardar Cambios
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="m-t-80 m-b-80" *ngIf="showPaymentForm">
+      <form class="login100-form" [formGroup]="paymentForm" (ngSubmit)="onSubmitPaymentMethod()">
+
+
+        <!-- Método de Pago -->
+        <p-fieldset legend="cambiar Método de Pago">
+          <div class="wrap-input100 m-t-10 m-b-10">
+            <p-selectButton [options]="paymentOptions" formControlName="paymentMethod">
+              <ng-template let-option>
+                {{ option.label }}
+              </ng-template>
+            </p-selectButton>
+          </div>
+
+          <div *ngIf="paymentForm.get('paymentMethod')?.value === 'tarjeta'">
+            <div class="wrap-input100 m-t-10 m-b-10">
+              <input class="input100" type="text" formControlName="numsTarjeta" placeholder="Número de Tarjeta">
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-credit-card"></i>
+              </span>
+              <div class="error-message"
+                *ngIf="paymentForm.get('numsTarjeta')?.hasError('required') && paymentForm.get('numsTarjeta')?.touched">
+                el numero de tarjeta es obligatorio.
+              </div>
+              <div class="error-message"
+                *ngIf="paymentForm.get('numsTarjeta')?.hasError('pattern') && paymentForm.get('numsTarjeta')?.touched">
+                El numero de tarjeta debe tener 16 números.
+              </div>
+            </div>
+            <div class="wrap-input100 m-t-10 m-b-10">
+              <input class="input100" type="date" formControlName="dateOfExpiry" placeholder="Fecha de Caducidad">
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-calendar"></i>
+              </span>
+              <div class="error-message"
+                *ngIf="paymentForm.get('dateOfExpiry')?.hasError('required') && paymentForm.get('dateOfExpiry')?.touched">
+                La fecha de caducidad es obligatoria.
+              </div>
+              <div class="error-message"
+                *ngIf="paymentForm.get('dateOfExpiry')?.hasError('dateNotBeforeToday') && paymentForm.get('dateOfExpiry')?.touched">
+                La fecha de caducidad no puede ser anterior a hoy.
+              </div>
+            </div>
+            <div class="wrap-input100 m-t-10 m-b-10">
+              <input class="input100" type="text" formControlName="cvv" placeholder="CVV">
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-lock"></i>
+              </span>
+              <div class="error-message"
+                *ngIf="paymentForm.get('cvv')?.hasError('required') && paymentForm.get('cvv')?.touched">
+                El CVV es obligatorio.
+              </div>
+              <div class="error-message"
+                *ngIf="paymentForm.get('cvv')?.hasError('pattern') && paymentForm.get('cvv')?.touched">
+                El CVV debe tener 3 números.
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="paymentForm.get('paymentMethod')?.value === 'iban'">
+            <div class="wrap-input100 m-t-10 m-b-10">
+              <input class="input100" type="text" formControlName="iban" placeholder="IBAN">
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                <i class="fa fa-university"></i>
+              </span>
+              <div class="error-message"
+                *ngIf="paymentForm.get('iban')?.hasError('required') && paymentForm.get('iban')?.touched">
+                El IBAN es obligatorio.
+              </div>
+              <div class="error-message"
+                *ngIf="paymentForm.get('iban')?.hasError('pattern') && paymentForm.get('iban')?.touched">
+                El IBAN debe tener 2 letras seguidas de 22 números.
+              </div>
+            </div>
+          </div>
+        </p-fieldset>
+
+        <div class="container-login100-form-btn m-t-10 m-b-10">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn" type="submit">
+              Guardar Cambios
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

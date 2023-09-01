@@ -1,0 +1,12 @@
+.panel-container {
+  flex: 1;
+  background-color: lightgray; /* Solo para visualizar el espacio ocupado por el panel */
+  padding: 10px; /* Ajusta el margen superior e inferior del panel */
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  height: 100vh;
+}
+

@@ -1,0 +1,28 @@
+/* Estilos personalizados para el componente MyCriptosComponent */
+
+/* Estilos para el contenedor principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  height: 100vh;
+}
+
+/* Estilos para la sección de tarjetas */
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px; /* Ajusta el margen entre las tarjetas y el panel */
+}
+
+.card {
+  flex: 1;
+  margin: 0 10px; /* Ajusta el margen horizontal entre las tarjetas */
+}
+
+/* Estilos para el panel */
+.panel-container {
+  flex: 1;
+  background-color: lightgray; /* Solo para visualizar el espacio ocupado por el panel */
+  padding: 20px; /* Ajusta el margen superior e inferior del panel */
+}

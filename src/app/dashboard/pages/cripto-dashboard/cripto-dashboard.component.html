@@ -1,0 +1,43 @@
+<!-- <div class="grid">
+  <ng-container *ngFor="let currency of currencies ">
+    <div class="m-t-10 m-b-10 m-l-10 m-r-10">
+      <p-card [header]="currency.name" subheader="Balance actual">
+        <div class="crypto-info">
+          <p>Balance: {{currency.quote.USD.price}}</p>
+          <button pButton label="Comprar" class="p-button-rounded p-button-success"></button>
+          <a [routerLink]="['/dashboard/detail', currency.id]">Ver detalles</a>
+        </div>
+      </p-card>
+    </div>
+  </ng-container>
+</div> -->
+<div class="container">
+  <div class="panel-container">
+    <p-panel header="Lista de Criptomonedas" >
+      <p-table [value]="currencies">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Cripto moneda</th>
+            <th>Precio</th>
+            <th>Volumen 24h</th>
+            <th>Tendenci de 30 dias</th>
+            <th>Cambio 24h</th>
+            <th>market_cap </th>
+            <th>last_updated </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-currency>
+          <tr [routerLink]="['/dashboard/detail', currency.id]">
+            <td>{{ currency.name }}</td>
+            <td>{{ currency.quote.USD.price }} $</td>
+            <td>{{ currency.quote.USD.volume_24h | number }}</td>
+            <td> chart</td>
+            <td>{{ currency.quote.USD.percent_change_24h | number }}</td>
+            <td>{{ currency.quote.USD.market_cap | number }}</td>
+            <td>{{ currency.quote.USD.last_updated }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+  </div>
+</div>
