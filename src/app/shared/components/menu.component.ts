@@ -17,10 +17,9 @@ export class MenuComponent {
   items: MenuItem[] = [];
 
   ngOnInit() {
-    const currentUserString = localStorage.getItem('currentUser');
-    if (currentUserString) {
-      const currentUser = JSON.parse(currentUserString);
-      const userMail = currentUser.email;
+    const currentUserMail = localStorage.getItem('currentUserEmail');
+    if (currentUserMail) {
+
 
     this.items = [
       {
@@ -33,14 +32,14 @@ export class MenuComponent {
         routerLink: '/dashboard/ingresar-dinero'
       },
       {
-        label: 'Mis Criptomonedas',
+        label: 'Movimientos',
         icon: 'pi pi-chart-line',
-        routerLink: '/dashboard/mis-criptomonedas'
+        routerLink: '/dashboard/Movimientos'
       },
       {
         label: 'Editar Perfil',
         icon: 'pi pi-user-edit',
-        routerLink: `/dashboard/editar-perfil/${userMail}`
+        routerLink: `/dashboard/editar-perfil/${currentUserMail}`
       },
       {
         label: 'Log Out',

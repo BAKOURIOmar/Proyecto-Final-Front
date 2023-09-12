@@ -28,18 +28,18 @@ export class RegisterPageComponent implements OnInit {
     });
 
     this.myForm = this.fb.group({
-      firstName: ['John', Validators.required],
-      lastName: ['Doe', Validators.required],
-      password: ['Abc123@', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]],
-      email: ['johhndoe@example.ma', [Validators.required, Validators.pattern(emailPattern)]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]],
+      email: ['', [Validators.required, Validators.pattern(emailPattern)]],
       country: ['', Validators.required],
-      city: ['New York', Validators.required],
-      direccion: ['123 Main St', Validators.required],
-      paymentMethod: ['tarjeta', Validators.required], // Valor predeterminado: 'tarjeta'
-      numsTarjeta: ['1234567890123456', []], // Deja las validaciones vacías para comenzar
+      city: ['', Validators.required],
+      direccion: ['', Validators.required],
+      paymentMethod: ['', Validators.required],
+      numsTarjeta: ['', []],
       iban: ['', [Validators.pattern(/^[A-Za-z]{2}[0-9]{22}$/)]],
-      dateOfExpiry: ['', [Validators.required, this.dateNotBeforeToday]], // Deja las validaciones vacías para comenzar
-      cvv: ['123', []], // Deja las validaciones vacías para comenzar
+      dateOfExpiry: ['', []],
+      cvv: ['', []],
     });
 
 
@@ -53,18 +53,19 @@ export class RegisterPageComponent implements OnInit {
         ]);
         // Los campos de tarjeta no serán requeridos ni validados
         this.myForm.get('numsTarjeta')?.setValidators([]);
-        this.myForm.get('DateOfExpiry')?.setValidators([]);
+        this.myForm.get('dateOfExpiry')?.setValidators([]);
         this.myForm.get('cvv')?.setValidators([]);
       } else {
         // Si selecciona tarjeta, los campos de tarjeta serán requeridos y validados
+        this.myForm.get('dateOfExpiry')?.setValidators([
+          Validators.required,
+          this.dateNotBeforeToday,
+        ]);
         this.myForm.get('numsTarjeta')?.setValidators([
           Validators.required,
           Validators.pattern(/^[0-9]{16}$/),
         ]);
-        this.myForm.get('DateOfExpiry')?.setValidators([
-          Validators.required,
-          this.dateNotBeforeToday,
-        ]);
+
         this.myForm.get('cvv')?.setValidators([
           Validators.required,
           Validators.pattern(/^[0-9]{3}$/),
@@ -76,7 +77,7 @@ export class RegisterPageComponent implements OnInit {
       // Actualiza las validaciones en los campos
       this.myForm.get('numsTarjeta')?.updateValueAndValidity();
       this.myForm.get('iban')?.updateValueAndValidity();
-      this.myForm.get('DateOfExpiry')?.updateValueAndValidity();
+      this.myForm.get('dateOfExpiry')?.updateValueAndValidity();
       this.myForm.get('cvv')?.updateValueAndValidity();
     });
 

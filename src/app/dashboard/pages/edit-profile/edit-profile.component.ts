@@ -88,7 +88,9 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.authService.getCurrentUser();
+     this.authService.getCurrentUser().subscribe( uc =>
+      this.user =uc
+     );
      if (this.user) {
       this.paymentForm.patchValue({
         paymentMethod: this.user.paymentMethod,
@@ -106,7 +108,7 @@ export class EditProfileComponent implements OnInit {
     this.paymentForm.markAllAsTouched();
     if (this.passwordForm.valid) {
 
-      const email = this.authService.getCurrentUser()?.email; // Obtén el email del usuario actual
+      const email = this.authService.getCurrentUserEmail(); // Obtén el email del usuario actual
       const newPassword = this.passwordForm.get('newPassword')?.value;
 
       if (email && newPassword) {
@@ -145,7 +147,7 @@ export class EditProfileComponent implements OnInit {
     console.log(this.paymentForm.value)
     this.paymentForm.markAllAsTouched();
     if (this.paymentForm.valid) {
-      const email = this.authService.getCurrentUser()?.email; // Obtén el email del usuario actual
+      const email = this.authService.getCurrentUserEmail(); // Obtén el email del usuario actual
       const paymentMethod = this.paymentForm.value;
       console.log(paymentMethod)
       if (email && paymentMethod) {

@@ -7,6 +7,7 @@ import {PanelModule} from 'primeng/panel';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TableModule} from 'primeng/table';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {DropdownModule} from 'primeng/dropdown';
 @NgModule({
   declarations: [],
   exports: [
@@ -17,7 +18,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     PanelModule,
     ToolbarModule,
     TableModule,
-    SelectButtonModule
+    SelectButtonModule,
+    DropdownModule
   ]
 })
 export class PrimeNgModule { }

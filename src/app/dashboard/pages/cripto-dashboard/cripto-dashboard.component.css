@@ -1,12 +1,23 @@
 .panel-container {
   flex: 1;
-  background-color: lightgray; /* Solo para visualizar el espacio ocupado por el panel */
-  padding: 10px; /* Ajusta el margen superior e inferior del panel */
+  background-color: lightgray;
+  padding: 10px;
 }
 .container {
   display: flex;
   flex-direction: column;
   background-color: lightgray;
   height: 100vh;
+}
+
+/* Estilo normal para las filas de la tabla */
+.custom-table tr {
+  transition: background-color 0.3s; /* Animación de transición suave */
+}
+
+/* Estilo de hover para las filas de la tabla */
+.custom-table tr:hover {
+  background-color: #f0f0f0; /* Color de fondo en hover */
+  cursor: pointer;
 }
 

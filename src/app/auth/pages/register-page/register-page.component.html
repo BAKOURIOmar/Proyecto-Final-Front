@@ -54,10 +54,13 @@
         <div class="error-message" *ngIf="myForm.get('password')?.hasError('required') && myForm.get('password')?.touched">
           La contraseña es obligatoria.
       </div>
-      <div class="error-message" *ngIf="myForm.get('password')?.hasError('minlength') && myForm.get('password')?.hasError('pattern') && myForm.get('password')?.touched">
-          La contraseña debe tener al menos 6 caracteres y 1 mayúscula y 1 carácter especial.
+      <div class="error-message" *ngIf="(myForm.get('password')?.hasError('minlength') || myForm.get('password')?.hasError('pattern')) && myForm.get('password')?.touched">
+          La contraseña debe tener al menos 6 caracteres y 1 mayúscula y 1 carácter especial (@$!%*?&) .
       </div>
     </div>
+
+
+
 
 
 
@@ -201,7 +204,7 @@
             Inicia sesión aquí
         </a>
     </div>
-    <div *ngIf="myForm.invalid">
+    <!-- <div *ngIf="myForm.invalid">
       <p>Formulario inválido. Por favor, corrija los siguientes errores:</p>
       <ul>
         <ng-container *ngFor="let controlName of getFormControls()">
@@ -215,6 +218,6 @@
           </li>
         </ng-container>
       </ul>
-    </div>
+    </div> -->
 
 </form>

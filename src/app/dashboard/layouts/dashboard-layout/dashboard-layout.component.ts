@@ -12,6 +12,11 @@ export class DashboardLayoutComponent {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.currentUser = this.authService.getCurrentUser();
+
+    this.authService.getCurrentUser().subscribe(uc=>{
+    console.log(uc);
+      this.currentUser = uc
+    }
+    );
   }
 }

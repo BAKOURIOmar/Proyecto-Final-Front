@@ -24,7 +24,7 @@
       <p>Tendencia 30 días: {{ currency?.quote?.USD?.percent_change_30d | number }}%</p>
       <p>Cambio 24h: {{ currency?.quote?.USD?.percent_change_24h | number }}%</p>
       <p>Market Cap: ${{ currency?.quote?.USD?.market_cap | number }}</p>
-      <p>Última actualización: {{ currency?.quote?.USD?.last_updated }}</p>
+      <p>Última actualización: {{ currency?.quote?.USD?.last_updated | date }}</p>
     </div>
   </div>
 </div>

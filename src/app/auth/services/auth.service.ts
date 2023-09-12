@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, catchError, throwError } from 'rxjs';
+import { Observable, map, catchError, throwError, of } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user.interface';
@@ -14,12 +14,20 @@ export class AuthService {
 
   constructor(private http: HttpClient ){}
 
-  getCurrentUser(): User | null {
-    const userJson = localStorage.getItem('currentUser');
+  getCurrentUserEmail(): string | null {
+    const userJson = localStorage.getItem('currentUserEmail');
     if (userJson) {
       return JSON.parse(userJson);
     }
     return null;
+  }
+  getCurrentUser(): Observable< User| null> {
+    const userJson = localStorage.getItem('currentUserEmail');
+    if (userJson) {
+    const url  = `${ this.baseUrl }/auth/user/${JSON.parse(userJson)}`;
+      return this.http.get<User>(url);
+    }
+    return of(null);
   }
 
   login( email: string, password: string ): Observable<boolean> {
@@ -31,7 +39,7 @@ export class AuthService {
       .pipe(
         map(response => {
             if(response) {
-              localStorage.setItem('currentUser', JSON.stringify(response));
+              localStorage.setItem('currentUserEmail', JSON.stringify(response.email));
               console.log(response);
               return true};
             return false;

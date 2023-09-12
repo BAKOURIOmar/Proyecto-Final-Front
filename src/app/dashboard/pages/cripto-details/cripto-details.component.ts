@@ -18,15 +18,19 @@ export class CriptoDetailsComponent {
   ) { }
 
   ngOnInit(): void {
-    this.dashboardService.getCriptos().subscribe(() => {
+    debugger;
       this.route.paramMap.subscribe(params => {
         const id = Number(params.get('id'));
-        this.dashboardService.getCriptos().subscribe(criptos => {
-          console.log(criptos);
-          this.currency = criptos.data.find(currency => currency.id === id);;
+        console.log(id);
+        this.dashboardService.getCriptos(id).subscribe(userCurrencies => {
+          console.log(userCurrencies);
+          this.currency = userCurrencies.find(userCurrency => {
+            return userCurrency.coin.id === id;
+          })?.coin;
+
       });
       });
-    });
+
   }
 
   showBuyDialog(){

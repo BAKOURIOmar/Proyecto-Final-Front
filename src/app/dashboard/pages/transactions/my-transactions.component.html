@@ -1,0 +1,74 @@
+<div class="container">
+
+  <div class="cards-container">
+    <div class="card">
+      <p-card class="p-card-style text-up text-center">
+        <span class="text-black">
+        <span class="label-input100">Fecha </span>
+        <input class="input100" type="date" [(ngModel)]="fecha">
+      </span>
+      </p-card>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <div class="card">
+      <p-card class="p-card-style text-up text-center">
+
+        <span class="text-black">
+        <label for="moneda">Moneda:</label>
+        <p-dropdown [options]="monedas" [(ngModel)]="moneda" optionLabel="label" optionValue="value"
+          placeholder="Selecciona una moneda"></p-dropdown>
+
+        </span>
+        </p-card>
+    </div>
+  </div>
+
+
+  <div class="cards-container">
+    <div class="card">
+      <p-card class="p-card-style text-up text-center">
+        <span class="text-black">
+        <label for="tipoOperacion">Tipo de Operación:</label>
+        <p-dropdown [options]="tipoOperaciones" [(ngModel)]="tipoOperacion" optionLabel="label" optionValue="value"
+          placeholder="Selecciona el tipo de transacción o movimiento"></p-dropdown>
+        </span>
+        </p-card>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <div class="card">
+      <p-card class="p-card-style text-up text-center">
+        <span class="text-black">
+        <p-button class="login100-form-btn" (click)="buscarMovimientos()">Buscar</p-button>
+      </span>
+      </p-card>
+    </div>
+  </div>
+
+
+  <div class="panel-container">
+    <p-panel header="Mis Movimientos" class="p-1">
+      <p-table [value]="movimientos">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Fecha</th>
+            <th>Cantidad</th>
+            <th>Tipo de Operación</th>
+            <th>Moneda</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-movimiento>
+          <tr>
+            <td>{{ movimiento.date }}</td>
+            <td>{{ movimiento.amount }}</td>
+            <td>{{ movimiento.type }}</td>
+            <td>{{ movimiento.coin.name }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+  </div>
+</div>
