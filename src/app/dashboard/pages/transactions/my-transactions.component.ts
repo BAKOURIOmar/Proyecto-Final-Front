@@ -4,6 +4,7 @@ import { Transaction } from '../../interfaces/transaction.inteface';
 import { DashboardService } from '../../services/dashboard.service';
 import { User } from 'src/app/auth/interfaces/user.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './my-transactions.component.html',
@@ -18,8 +19,13 @@ export class MyTransactionsComponent implements OnInit {
   movimientos: Transaction[] = [];
    private currentUser :User | null = null;
 
-   constructor(private dashboardService: DashboardService, private authService: AuthService) {
+   constructor(private dashboardService: DashboardService, private authService: AuthService,private router: Router) {
+    const userEmail = localStorage.getItem('currentUserEmail');
 
+      if (!userEmail) {
+
+        this.router.navigate(['/login']);
+      }
   }
 
   ngOnInit(): void {
@@ -59,14 +65,19 @@ export class MyTransactionsComponent implements OnInit {
   }
 
   buscarMovimientos() {
+    debugger;
     if (this.fecha) {
       // Reemplaza todos los guiones "-" con barras "/"
       this.fecha = this.fecha.replace(/-/g, '/');
     }
     this.dashboardService.filtertransactions( this.currentUser!.email ,this.fecha, this.moneda, this.tipoOperacion).subscribe(transactions => {
       this.movimientos = transactions;
-      console.log(this.movimientos);
+      //console.log(this.movimientos);
+    this.fecha = undefined ;
+
     });
+
   }
+
 
 }

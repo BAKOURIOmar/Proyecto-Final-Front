@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from '../../services/dashboard.service';
 import { Currency } from '../../interfaces/cripto.interface';
 import Swal from 'sweetalert2';
@@ -10,12 +10,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cripto-details.component.css']
 })
 export class CriptoDetailsComponent {
-  currency?: Currency; // Declarar una variable para almacenar la criptomoneda
+  currency?: Currency;
 
   constructor(
     private route: ActivatedRoute,
-    private dashboardService: DashboardService // Importa tu servicio para obtener los datos
-  ) { }
+    private dashboardService: DashboardService,
+    private router: Router
+  ) {
+    const userEmail = localStorage.getItem('currentUserEmail');
+
+    if (!userEmail) {
+
+      this.router.navigate(['/login']);
+    }
+  }
 
   ngOnInit(): void {
     debugger;

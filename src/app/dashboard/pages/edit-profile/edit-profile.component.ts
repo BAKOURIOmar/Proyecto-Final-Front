@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { SelectButton } from 'primeng/selectbutton';
 import { User } from 'src/app/auth/interfaces/user.interface';
@@ -33,7 +34,13 @@ export class EditProfileComponent implements OnInit {
   showPaymentForm = false; // Controla la visibilidad del formulario de método de pago
 
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private fb: FormBuilder,private router: Router) {
+    const userEmail = localStorage.getItem('currentUserEmail');
+
+      if (!userEmail) {
+
+        this.router.navigate(['/login']);
+      }
     this.passwordForm = this.fb.group({
       currentPassword: ['', [Validators.minLength(6), Validators.pattern(/^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]],
       newPassword: ['', [Validators.minLength(6), Validators.pattern(/^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]],

@@ -1,51 +1,51 @@
 <div class="container">
 
   <div class="cards-container">
-    <div class="card">
-      <p-card class="p-card-style text-up text-center">
-        <span class="text-black">
-        <span class="label-input100">Fecha </span>
+
+    <p-card class="card">
+      <span class="text-black">
+        <span class="text-black">Fecha </span>
         <input class="input100" type="date" [(ngModel)]="fecha">
       </span>
-      </p-card>
-    </div>
-  </div>
+    </p-card>
 
-  <div class="cards-container">
-    <div class="card">
-      <p-card class="p-card-style text-up text-center">
 
-        <span class="text-black">
+
+
+
+    <p-card class="card">
+
+      <span class="text-black">
         <label for="moneda">Moneda:</label>
-        <p-dropdown [options]="monedas" [(ngModel)]="moneda" optionLabel="label" optionValue="value"
+        <p-dropdown id="moneda" [options]="monedas" [(ngModel)]="moneda" optionLabel="label" optionValue="value"
           placeholder="Selecciona una moneda"></p-dropdown>
 
-        </span>
-        </p-card>
-    </div>
-  </div>
+      </span>
+    </p-card>
 
 
-  <div class="cards-container">
-    <div class="card">
-      <p-card class="p-card-style text-up text-center">
-        <span class="text-black">
+
+
+
+
+    <p-card class="card">
+      <span class="text-black">
         <label for="tipoOperacion">Tipo de Operación:</label>
-        <p-dropdown [options]="tipoOperaciones" [(ngModel)]="tipoOperacion" optionLabel="label" optionValue="value"
-          placeholder="Selecciona el tipo de transacción o movimiento"></p-dropdown>
-        </span>
-        </p-card>
-    </div>
-  </div>
+        <p-dropdown id="tipoOperacion" [options]="tipoOperaciones" [(ngModel)]="tipoOperacion" optionLabel="label"
+          optionValue="value" placeholder="Selecciona el tipo de transacción o movimiento"></p-dropdown>
+      </span>
+    </p-card>
 
-  <div class="cards-container">
-    <div class="card">
-      <p-card class="p-card-style text-up text-center">
-        <span class="text-black">
+
+
+
+
+    <p-card class="card">
+      <span class="text-black">
         <p-button class="login100-form-btn" (click)="buscarMovimientos()">Buscar</p-button>
       </span>
-      </p-card>
-    </div>
+    </p-card>
+
   </div>
 
 
@@ -63,7 +63,7 @@
         <ng-template pTemplate="body" let-movimiento>
           <tr>
             <td>{{ movimiento.date }}</td>
-            <td>{{ movimiento.amount }}</td>
+            <td>{{ movimiento.amount }} {{ movimiento.coin.symbol }}</td>
             <td>{{ movimiento.type }}</td>
             <td>{{ movimiento.coin.name }}</td>
           </tr>

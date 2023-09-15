@@ -13,7 +13,6 @@ const routes: Routes = [
     component: DashboardLayoutComponent,
     children: [
       {path: 'current' , component :CriptoDashboardComponent},
-      {path: 'ingresar-dinero' , component :AddMoneyComponent},
       {path: 'Movimientos' , component :MyTransactionsComponent},
       {path: 'editar-perfil/:id' , component :EditProfileComponent},
       { path: 'detail/:id', component: CriptoDetailsComponent },

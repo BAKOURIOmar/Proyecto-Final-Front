@@ -24,7 +24,7 @@ export class AuthService {
   getCurrentUser(): Observable< User| null> {
     const userJson = localStorage.getItem('currentUserEmail');
     if (userJson) {
-    const url  = `${ this.baseUrl }/auth/user/${JSON.parse(userJson)}`;
+    const url  = `${ this.baseUrl }/user/${JSON.parse(userJson)}`;
       return this.http.get<User>(url);
     }
     return of(null);
@@ -32,7 +32,7 @@ export class AuthService {
 
   login( email: string, password: string ): Observable<boolean> {
 
-    const url  = `${ this.baseUrl }/auth/login`;
+    const url  = `${ this.baseUrl }/user/auth/login`;
     const body = { email, password };
 
     return this.http.post<User>( url, body )
@@ -48,7 +48,7 @@ export class AuthService {
       );
   }
   register(user: User): Observable<boolean> {
-    const url = `${this.baseUrl}/auth/register`;
+    const url = `${this.baseUrl}/user/auth/register`;
     console.log(user)
     return this.http.post<User>(url, user)
       .pipe(
@@ -64,7 +64,7 @@ export class AuthService {
   }
 
   updatePassword( email: string, newPassword: string ):Observable<boolean>{
-    const url  = `${ this.baseUrl }/auth/user/${email}/updatepassword`;
+    const url  = `${ this.baseUrl }/user/${email}/updatepassword`;
 
 
     return this.http.put<User>( url, newPassword )
@@ -85,7 +85,7 @@ export class AuthService {
 
 
   updatePaymentMethod(email: string, paymentMethod :PaymentMethod){
-    const url  = `${ this.baseUrl }/auth/user/${email}/updatepaymentmethod`;
+    const url  = `${ this.baseUrl }/user/${email}/updatepaymentmethod`;
 
 
     return this.http.put<User>( url, paymentMethod )

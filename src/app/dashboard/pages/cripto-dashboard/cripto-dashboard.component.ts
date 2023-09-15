@@ -3,6 +3,7 @@ import { DashboardService } from '../../services/dashboard.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
 import { User, UserCurrency } from 'src/app/auth/interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './cripto-dashboard.component.html',
@@ -10,10 +11,16 @@ import { User, UserCurrency } from 'src/app/auth/interfaces/user.interface';
 })
 export class CriptoDashboardComponent {
   public userCurrencies: UserCurrency[] = [];
-  user: User | null = null;
+  private user: User | null = null;
   public TotalInEuros: number = 0;
   loading = false;
-  constructor(private dashboardService: DashboardService, private authService: AuthService) {
+  constructor(private dashboardService: DashboardService, private authService: AuthService ,private router: Router) {
+    const userEmail = localStorage.getItem('currentUserEmail');
+
+    if (!userEmail) {
+
+      this.router.navigate(['/login']);
+    }
 
     this.authService.getCurrentUser().subscribe((cu) => {
       if (cu) {
@@ -32,7 +39,23 @@ export class CriptoDashboardComponent {
             this.TotalInEuros += priceCriptoInEuros;
           });
           this.hideLoader();
-        });
+        },
+        (error)=>{
+          Swal.fire({
+            title: 'Error 404',
+            text: 'No se ha encontrado la página solicitada.',
+            icon: 'error',
+            showConfirmButton: true,
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
+
+        }
+
+        );
       }
     });
   }
@@ -67,7 +90,6 @@ export class CriptoDashboardComponent {
       reverseButtons: true,
 
       preConfirm: () => {
-        debugger;
         // Aquí puedes realizar la lógica de compra con la cantidad ingresada
         const amountInput = document.getElementById('cantidad') as HTMLInputElement;
         const ibanOtarjetaInput = document.getElementById('ibanOtarjeta') as HTMLInputElement;

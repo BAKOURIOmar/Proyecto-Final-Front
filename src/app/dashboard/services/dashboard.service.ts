@@ -28,21 +28,21 @@ export class DashboardService {
   }
 
   buyCryptocurrency( email :string,criptoName :string,amount : number){
-    const url=`${ this.baseUrl }/auth/buyCryptocurrency?email=${email }&criptoName=${criptoName }&amount=${amount }`;
+    const url=`${ this.baseUrl }/user/buyCryptocurrency?email=${email }&criptoName=${criptoName }&amount=${amount }`;
     return this.http.post<User>(url,null);
   }
 
   sellCryptocurrency( email :string,criptoName :string,amountInCripto : number){
-    const url=`${ this.baseUrl }/auth/sellCryptocurrency?email=${email }&criptoName=${criptoName }&amount=${amountInCripto }`;
+    const url=`${ this.baseUrl }/user/sellCryptocurrency?email=${email }&criptoName=${criptoName }&amount=${amountInCripto }`;
     return this.http.post<User>(url,null);
   }
   depositeMoney( email :string,amount : number){
-    const url=`${ this.baseUrl }/auth/depositeMoney?email=${email }&amount=${amount }`;
+    const url=`${ this.baseUrl }/user/depositeMoney?email=${email }&amount=${amount }`;
     return this.http.post<User>(url,null);
   }
 
   withdrawMoney(email :string,amount : number){
-    const url=`${ this.baseUrl }/auth/withdrawMoney?email=${email }&amount=${amount }`;
+    const url=`${ this.baseUrl }/user/withdrawMoney?email=${email }&amount=${amount }`;
     return this.http.post<User>(url,null);
   }
     filtertransactions( userEmail: string , fecha? : string  ,  nameCoin? :string  ,  tipoOperacion? :TypeTransaction    ){

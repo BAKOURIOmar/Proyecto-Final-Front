@@ -26,7 +26,7 @@ export class LoginPageComponent {
   // Función para manejar el envío del formulario
   onSubmit() {
     const { email, password } = this.myForm.value;
- console.log(email,'    ' ,password )
+ //console.log(email,'    ' ,password )
     this.authService.login(email, password)
       .subscribe({
         next: () => this.router.navigateByUrl('/dashboard'),

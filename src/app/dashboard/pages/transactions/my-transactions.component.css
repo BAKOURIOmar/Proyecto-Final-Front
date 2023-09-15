@@ -1,21 +1,29 @@
-/* Estilos para el contenedor principal */
 .container {
   display: flex;
   flex-direction: column;
   background-color: lightgray;
   height: 100vh;
 }
-
 .cards-container {
+  flex: 1;
   display: flex;
-  justify-content: space-between;
-  margin: 20px; /* Ajusta el margen entre las tarjetas y el panel */
+  align-items: stretch;
+  padding: 20px;
 }
 
 .card {
-  flex: 1;
-  margin: 0 10px; /* Ajusta el margen horizontal entre las tarjetas */
+  display: flex;
+  margin: 0 5px; /* Ajusta el margen horizontal entre las tarjetas cuando la pantalla es pequeña */
+  padding: 10px;
 }
+
+@media (max-width: 768px) {
+  .card {
+    margin: 0 2px; /* Ajusta el margen lateral cuando la pantalla es pequeña */
+  }
+}
+
+
 
 /* Estilos para el panel */
 .panel-container {

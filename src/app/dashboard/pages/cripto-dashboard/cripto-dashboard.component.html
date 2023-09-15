@@ -46,7 +46,7 @@
           <tr >
             <td>{{ userCurrency.coin.name }}</td>
             <td>{{ userCurrency.quantity ? userCurrency.quantity : '0' }} {{userCurrency.coin.symbol}}</td>
-            <td>1 {{userCurrency.coin.symbol}} = {{ userCurrency.marketPrice | number }}€ <br>
+            <td>1 {{userCurrency.coin.symbol}} = {{ userCurrency.marketPrice }}€ <br>
               <p>total {{userCurrency.marketPrice * userCurrency.quantity ? userCurrency.marketPrice * userCurrency.quantity : '0'}}€</p>
             </td>
             <td><button pButton label="{{userCurrency.coin.symbol==='EUR' ? 'Agregar':'Comprar'}}" class="p-button-rounded p-button-success" (click)="showBuyDialog(userCurrency.coin.symbol==='EUR' ? 'Agregar':'Comprar',userCurrency.coin.name)"></button>

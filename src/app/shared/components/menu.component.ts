@@ -26,10 +26,6 @@ export class MenuComponent {
         label: 'Dashboard',
         icon: 'pi pi-home',
         routerLink: '/dashboard/current'
-      },{
-        label: 'Ingresar Dinero',
-        icon: 'pi pi-money-bill',
-        routerLink: '/dashboard/ingresar-dinero'
       },
       {
         label: 'Movimientos',
@@ -45,6 +41,7 @@ export class MenuComponent {
         label: 'Log Out',
         icon: 'pi pi-sign-out',
         command: () => {
+          localStorage.removeItem('currentUserEmail');
           // Lógica para cerrar sesión
         },
         routerLink: '/auth/login',
